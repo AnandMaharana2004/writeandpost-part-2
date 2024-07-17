@@ -1,14 +1,3 @@
-// const bcrypt = require('bcrypt');
-// const saltRounds = 10;
-
-// function hashPassword (password){
-//     bcrypt.hash(password, saltRounds, function(err, hash) {
-//         return hash
-//     });
-// }
-
-// module.exports = {hashPassword}
-
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -24,4 +13,16 @@ function hashPassword(password) {
     });
 }
 
-module.exports = { hashPassword };
+
+function cheakPassword(password, hashedPassword){
+    return new Promise((resolve, reject)=> {
+        bcrypt.compare(password, hashedPassword,function(err,result){
+            if(err){
+                reject(err)
+            } else{
+                resolve(result)
+            }
+        })
+    })
+}
+module.exports = { hashPassword , cheakPassword};
