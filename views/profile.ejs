@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Times New Roman', Times, serif
+        }
+
+        nav {
+            background-color: #ffffff;
+            margin-top: 1rem;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+
+        h2 {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: #000000;
+            text-transform: uppercase;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2d56e8;
+            border-bottom: .1rem solid #ffffff;
+            transition-duration: 800ms;
+            text-transform: uppercase;
+        }
+
+        a:hover {
+            border-bottom: .1rem solid #0037ff;
+            /* transition-duration: .8sec; */
+        }
+
+        .hero-section {
+            margin-top: 1rem;
+        }
+
+        .hero-top {
+            display: flex;
+            align-items: center;
+            gap: 10rem;
+        }
+
+        .profile-pic {
+            height: 11rem;
+            width: 11rem;
+            border-radius: 50%;
+            background-color: #b3b3b3;
+            margin: 2rem;
+            transition-duration: 800ms;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        .profile-pic:hover {
+            border-radius: 0.2rem;
+        }
+
+        .post-section {
+            margin-left: 9.5rem;
+            margin-right: 9.5rem;
+            /* background-color: #353535; */
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            flex-wrap: wrap;
+            /* height: 15rem;
+            width: 5rem; */
+        }
+
+        .post {
+            height: 17rem;
+            width: 11rem;
+            background-color: #b3b3b3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: .2rem;
+        }
+
+        .pic {
+            height: 16rem;
+            width: 11rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            height: 15.5rem;
+            width: 10.5rem;
+        }
+
+        .pic-heading {
+            /* width: 100%; */
+            height: 18.72px;
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
+        .text {
+            margin-left: 1rem;
+            margin-right: 1rem;
+            /* background-color: red; */
+            height: 3rem;
+        }
+
+        .like-section {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .like-button {
+            color: #ffffff;
+            background-color: #0037ff;
+            border: none;
+            padding: .3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            cursor: pointer;
+            border-radius: .4rem;
+
+        }
+
+        .like-button:hover {
+            background-color: #2d56e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h2> Profile </h2>
+        <nav>
+            <a href="/post/allpost">All posts</a>
+            <a href="/user/register">create new user</a>
+            <a href="/user/login">login</a>
+            <a href="/user/logout">logout</a>
+        </nav>
+        <div class="hero-section">
+            
+            <div class="hero-top">
+                <div class="profile-pic">
+                    <% if(user.profilePic==="" ){ %>
+                        <a href="/user/uploadProfilepic">upload profile pic</a>
+                        <% } else{ %>
+                            <img src="/images/uploads/<%= user.profilePic %>" alt="">
+                            <% } %>
+                </div>
+                <div class="user-details">
+                    <h3>NAME : <span>
+                            <%= user.username %>
+                        </span></h3>
+                    <h3>AGE : <span>
+                            <%= user.age %>
+                        </span></h3>
+                </div>
+                <div>
+                    <a href="/post/upload">create a new post</a>
+                </div>
+            </div>
+            <div class="post-section">
+                <% user.posts.forEach(function(post){ %>
+
+                    <div class="post">
+                        <div class="pic-heading">
+                            <%= post.heading %>
+                        </div>
+                        <div class="pic">
+                            <img src="/images/uploads/<%= post.file %>" alt="not find">
+                        </div>
+                        <div class="text">
+                            <p>
+                                <%= post.text %>
+                            </p>
+                        </div>
+                        <div class="like-section">
+                            <h4>
+                                <%= post.like.length %>
+                            </h4>
+                            <a href="/post/like/<%= user._id %>" class="like-button">LIKE</a>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

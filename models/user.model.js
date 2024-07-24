@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const userSchema =new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     email: {
         type: String,
         require: true
@@ -14,16 +14,17 @@ const userSchema =new mongoose.Schema({
     },
     age: {
         type: Number,
-        require : true
+        require: true
     },
-    posts : [{
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "Posts"
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post"
     }],
-    profilePic : {
-        type : String,
+    profilePic: {
+        type: String,
+        default : ""
     },
-   
-},{timestamps : true})
+
+}, { timestamps: true })
 
 module.exports = mongoose.model("User", userSchema)

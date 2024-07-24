@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>allpost</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Times New Roman', Times, serif
+        }
+
+        nav {
+            background-color: #ffffff;
+            margin-top: 1rem;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+
+        h2 {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: #000000;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2d56e8;
+            border-bottom: .1rem solid #ffffff;
+            transition-duration: 800ms;
+            text-transform: uppercase;
+
+
+        }
+
+        a:hover {
+            border-bottom: .1rem solid #0037ff;
+            /* transition-duration: .8sec; */
+        }
+
+        .post-section {
+            margin-top: 5rem;
+            margin-left: 9.5rem;
+            margin-right: 9.5rem;
+            /* background-color: #353535; */
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .post {
+            height: 17rem;
+            width: 11rem;
+            background-color: #b3b3b3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: .2rem;
+        }
+
+        .pic {
+            height: 16rem;
+            width: 11rem;
+            /* background-color: #ffffff; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            height: 15.5rem;
+            width: 10.5rem;
+        }
+
+        .pic-heading {
+            /* width: 100%; */
+            height: 18.72px;
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
+        .text {
+            margin-left: 1rem;
+            margin-right: 1rem;
+            /* background-color: red; */
+            height: 3rem;
+        }
+
+        .like-section {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .like-button {
+            color: #ffffff;
+            background-color: #0037ff;
+            border: none;
+            padding: .3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            cursor: pointer;
+            border-radius: .4rem;
+
+        }
+
+        .like-button:hover {
+            background-color: #2d56e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h2>ALL POSTS CREATED BY DIFFERENT DIFFERENT USER</h2>
+        <nav>
+            <a href="/user/profile">profile</a>
+            <a href="/user/register">create new user</a>
+            <a href="/user/login">login </a>
+            <a href="/user/logout">logout</a>
+        </nav>
+        <div class="post-section">
+            <% posts.forEach(function(post){ %>
+
+                <div class="post">
+                    <div class="pic-heading">
+                        <%= post.heading %>
+                    </div>
+                    <div class="pic">
+                        <img src="/images/uploads/<%= post.file %>" alt="not find">
+                    </div>
+                    <div class="text">
+                        <p>
+                            <%= post.text %>
+                        </p>
+                    </div>
+                    <div class="like-section">
+                        <h4>
+                            <%= post.like.length %>
+                        </h4>
+                        <a href="/post/like/<%= post._id %>" class="like-button">LIKE</a>
+                    </div>
+                </div>
+
+            <% }) %>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

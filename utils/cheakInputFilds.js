@@ -1,15 +1,16 @@
-const cheakinputfildsForRegister = (email, password, username, age)=>{
-    if(email === "" || password ==="" || username === "" || age ===""){
+const cheakinputfildsForRegister = (email, password, username, age) => {
+    if (email === "" || password === "" || username === "" || age === "") {
         return false
     }
     return true
-    
+
 }
-const cheakinputfildsForLogin = (email, password) => {
-    if(email ==="" || password ===""){
+const cheakinputfildsForTwoinput = (input1, input2) => {
+    if (input1 === "" || input2 === "") {
         return false
-    } else{
+    } else {
         return true
     }
 }
-module.exports = { cheakinputfildsForRegister , cheakinputfildsForLogin}
+module.exports = { cheakinputfildsForRegister, cheakinputfildsForTwoinput }
+

@@ -1,16 +1,16 @@
 const jwt = require("jsonwebtoken");
 const setToken = (user) => {
     try {
-        let token = jwt.sign({email : user.email, userId : user._id},process.env.JWT_SECRET)
+        let token = jwt.sign({ email: user.email, userId: user._id }, process.env.JWT_SECRET)
         return token
-        
+
     } catch (error) {
         console.log("jwt setup fail");
     }
-    
+
 }
 
-const removeToken = ()=>{
+const removeToken = () => {
     try {
         let token = ""
         return token
@@ -19,4 +19,4 @@ const removeToken = ()=>{
     }
 }
 
-module.exports = {setToken, removeToken}
+module.exports = { setToken, removeToken }

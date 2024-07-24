@@ -14,15 +14,15 @@ function hashPassword(password) {
 }
 
 
-function cheakPassword(password, hashedPassword){
-    return new Promise((resolve, reject)=> {
-        bcrypt.compare(password, hashedPassword,function(err,result){
-            if(err){
+function cheakPassword(password, hashedPassword) {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hashedPassword, function (err, result) {
+            if (err) {
                 reject(err)
-            } else{
+            } else {
                 resolve(result)
             }
         })
     })
 }
-module.exports = { hashPassword , cheakPassword};
+module.exports = { hashPassword, cheakPassword };
