@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>allpost</title>
+    <title>Document</title>
     <style>
         * {
             padding: 0;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
             font-family: 'Times New Roman', Times, serif
         }
 
@@ -40,25 +40,22 @@
 
         }
 
+
         .a:hover {
             border-bottom: .1rem solid #0037ff;
             /* transition-duration: .8sec; */
         }
 
-        .post-section {
-            margin-top: 5rem;
-            margin-left: 9.5rem;
-            margin-right: 9.5rem;
-            /* background-color: #353535; */
+        .hero-section{
             display: flex;
-            flex-direction: row;
-            gap: 1rem;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
         }
 
         .post {
-            height: 18rem;
-            width: 11rem;
+            height: 20rem;
+            width: 12rem;
             background-color: #b3b3b3;
             display: flex;
             align-items: center;
@@ -97,46 +94,58 @@
             height: 3rem;
         }
 
-        .like-section {
-            width: 100%;
+        form {
             display: flex;
-            justify-content: space-around;
             align-items: center;
-        }
-        .ab{
-            text-decoration: none;
-        }
-
-        .like-button {
-            color: #ffffff;
-            background-color: #0037ff;
-            border: none;
-            padding: .3rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            cursor: pointer;
-            border-radius: .4rem;
-
+            justify-content: center;
+            flex-direction: column;
+            gap: .8rem;
+            margin-top: 15rem;
         }
 
-        .like-button:hover {
+        input {
+            border-left: none;
+            border-top: none;
+            border-right: none;
+            outline: none;
+            height: 2rem;
+            width: 15rem;
+            padding: .5rem;
+            /* border-radius: .2rem; */
+            /* background-color: #b1b1b1; */
+            color: #2d56e8;
+            letter-spacing: .01rem;
+            font-size: .9rem;
+        }
+
+        .button {
             background-color: #2d56e8;
+            color: #fff;
+            width: 9rem;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .button:hover {
+            background-color: #4568e6;
+
         }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <h2>SEARCH</h2>
-        <nav>
-            <a href="/user/profile" class="a">profile</a>
-            <a href="/user/register" class="a">create new user</a>
-            <a href="/user/login" class="a">login </a>
+        <h2>Edit Post</h2>
+        <nav class="nav">
+            <a href="/user/profile" class="a">my profile</a>
+            <a href="/user/register" class="a">register </a>
+            <a href="/user/login" class="a">login</a>
             <a href="/user/logout" class="a">logout</a>
         </nav>
-        <div class="post-section">
-            <% posts.forEach(function(post){ %>
 
+        <div class="hero-section">
+            <div class="left-post">
                 <div class="post">
                     <div class="pic-heading">
                         <%= post.heading %>
@@ -149,18 +158,21 @@
                             <%= post.text %>
                         </p>
                     </div>
-                    <div class="like-section">
-                        <h4>
-                            <%= post.like.length %>
-                        </h4>
-                        <a href="/post/like/<%= post._id %>" class="like-button ab">LIKE</a>
-                    </div>
-                    <a href="/post/profile/<%= post._id %>" class="ab ">visit profile</a>
                 </div>
-
-            <% }) %>
-
-
+            </div>
+    
+            <div class="right-form">
+                <form action="/post/edit/<%= post._id %>" method="post" enctype="multipart/form-data">
+                    <input type="text" name="heading" id="" placeholder="update your heading" value="<%= post.heading %>">
+                    <label for="nothing">enter your new photo</label>
+                    <input type="file" name="file" id="" value="<%= post.file %>">
+                    <input type="text" name="text" id="" placeholder="update your text container" value="<%= post.text %>">
+                    <input type="submit" value="update post" class="button">
+                </form>
+            </div>
+            <div class="delete">
+                <a href="/post/delete/<%= post._id %>">delete</a>
+            </div>
         </div>
     </div>
 </body>

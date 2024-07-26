@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>allpost</title>
+    <title>profile</title>
     <style>
         * {
             padding: 0;
@@ -28,25 +28,51 @@
             top: 1rem;
             left: 1rem;
             color: #000000;
+            text-transform: uppercase;
         }
 
-        .a {
+        a {
             text-decoration: none;
             color: #2d56e8;
             border-bottom: .1rem solid #ffffff;
             transition-duration: 800ms;
             text-transform: uppercase;
-
-
         }
 
-        .a:hover {
+        a:hover {
             border-bottom: .1rem solid #0037ff;
             /* transition-duration: .8sec; */
         }
 
+        .hero-section {
+            margin-top: 1rem;
+        }
+
+        .hero-top {
+            display: flex;
+            align-items: center;
+            gap: 10rem;
+        }
+
+        .profile-pic {
+            height: 11rem;
+            width: 11rem;
+            border-radius: 50%;
+            background-color: #b3b3b3;
+            margin: 2rem;
+            transition-duration: 800ms;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        .profile-pic:hover {
+            border-radius: 0.2rem;
+        }
+
         .post-section {
-            margin-top: 5rem;
             margin-left: 9.5rem;
             margin-right: 9.5rem;
             /* background-color: #353535; */
@@ -54,10 +80,12 @@
             flex-direction: row;
             gap: 1rem;
             flex-wrap: wrap;
+            /* height: 15rem;
+            width: 5rem; */
         }
 
         .post {
-            height: 18rem;
+            height: 17rem;
             width: 11rem;
             background-color: #b3b3b3;
             display: flex;
@@ -70,7 +98,6 @@
         .pic {
             height: 16rem;
             width: 11rem;
-            /* background-color: #ffffff; */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -103,9 +130,6 @@
             justify-content: space-around;
             align-items: center;
         }
-        .ab{
-            text-decoration: none;
-        }
 
         .like-button {
             color: #ffffff;
@@ -127,39 +151,56 @@
 
 <body>
     <div class="wrapper">
-        <h2>SEARCH</h2>
+        <h2> Profile </h2>
         <nav>
-            <a href="/user/profile" class="a">profile</a>
-            <a href="/user/register" class="a">create new user</a>
-            <a href="/user/login" class="a">login </a>
-            <a href="/user/logout" class="a">logout</a>
+            <a href="/user/profile">my profile</a>
+            <a href="/post/allpost">all posts</a>
+            <a href="/user/register">create new user</a>
+            <a href="/user/login">login</a>
+            <a href="/user/logout">logout</a>
         </nav>
-        <div class="post-section">
-            <% posts.forEach(function(post){ %>
+        <div class="hero-section">
 
-                <div class="post">
-                    <div class="pic-heading">
-                        <%= post.heading %>
-                    </div>
-                    <div class="pic">
-                        <img src="/images/uploads/<%= post.file %>" alt="not find">
-                    </div>
-                    <div class="text">
-                        <p>
-                            <%= post.text %>
-                        </p>
-                    </div>
-                    <div class="like-section">
-                        <h4>
-                            <%= post.like.length %>
-                        </h4>
-                        <a href="/post/like/<%= post._id %>" class="like-button ab">LIKE</a>
-                    </div>
-                    <a href="/post/profile/<%= post._id %>" class="ab ">visit profile</a>
+            <div class="hero-top">
+                <div class="profile-pic">
+                    <img src="/images/uploads/<%= postOwner.profilePic %>" alt="">
                 </div>
+                <div class="user-details">
+                    <h3>NAME : <span>
+                            <%= postOwner.username %>
+                        </span></h3>
+                    <h3>AGE : <span>
+                            <%= postOwner.age %>
+                        </span></h3>
+                </div>
+            </div>
+            <div class="post-section">
+                <% postOwner.posts.forEach(function(post){ %>
 
-            <% }) %>
+                    <div class="post">
+                        <div class="pic-heading">
+                            <%= post.heading %>
+                        </div>
+                        <div class="pic">
+                            <img src="/images/uploads/<%= post.file %>" alt="not find">
+                        </div>
+                        <div class="text">
+                            <p>
+                                <%= post.text %>
+                            </p>
+                        </div>
 
+                        <div class="like-section">
+                            <h4>
+                               total likes :  <%= post.like.length %>
+                            </h4>
+                        </div>                  
+   
+                    </div>
+                 
+                 <% }) %>
+
+            </div>
 
         </div>
     </div>
